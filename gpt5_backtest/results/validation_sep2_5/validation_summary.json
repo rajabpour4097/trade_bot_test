@@ -1,0 +1,27 @@
+{
+  "period": {
+    "start": "2025-09-02T00:00:00",
+    "end": "2025-09-05T23:59:00"
+  },
+  "real_signals": 13,
+  "all": {
+    "bt_trades": 3,
+    "unmatched_real": 13,
+    "unmatched_backtest": 3,
+    "matches": 0,
+    "avg_time_diff_min": null,
+    "median_time_diff_min": null,
+    "avg_price_diff_pips": null,
+    "median_price_diff_pips": null
+  },
+  "sell_only": {
+    "bt_trades": 2,
+    "unmatched_real": 6,
+    "unmatched_backtest": 2,
+    "matches": 0,
+    "avg_time_diff_min": null,
+    "median_time_diff_min": null,
+    "avg_price_diff_pips": null,
+    "median_price_diff_pips": null
+  }
+}

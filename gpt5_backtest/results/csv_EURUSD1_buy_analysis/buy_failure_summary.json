@@ -1,0 +1,10 @@
+{
+  "buy_trades": 125,
+  "wins": 45,
+  "losses": 79,
+  "timeouts": 1,
+  "win_rate": 36.0,
+  "sl_below_swing_low_share": 0.024,
+  "avg_zone_width_pips": 2.3010000000000024,
+  "avg_entry_minus_zone_mid_pips": 2.78310000000003
+}

@@ -1,0 +1,11 @@
+{
+  "total_trades": 56,
+  "wins": 28,
+  "losses": 24,
+  "timeouts": 4,
+  "win_rate": 50.0,
+  "avg_r": 0.1714285714285714,
+  "net_r": 9.599999999999998,
+  "buy_win_rate": 0.0,
+  "sell_win_rate": 50.0
+}

@@ -1,0 +1,9 @@
+{
+  "threshold": 6.0,
+  "entry_tolerance_pips": 2.0,
+  "lookback_bars": 120,
+  "two_touch_705": false,
+  "min_sl_pips": 2.0,
+  "sell_only": true,
+  "time_offset_min": 120
+}

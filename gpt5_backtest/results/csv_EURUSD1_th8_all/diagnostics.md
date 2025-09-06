@@ -1,0 +1,14 @@
+# Backtest Diagnostics
+
+Input: data/EURUSD1.csv
+
+- total_trades: 79
+- wins: 32
+- losses: 47
+- timeouts: 0
+- win_rate: 40.50632911392405
+- avg_r: -0.1088607594936709
+- net_r: -8.600000000000001
+- buy_win_rate: 40.0
+- sell_win_rate: 41.02564102564102
+

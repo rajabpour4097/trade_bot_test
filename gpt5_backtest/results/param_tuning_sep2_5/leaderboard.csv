@@ -1,0 +1,9 @@
+idx,threshold,entry_tolerance_pips,lookback_bars,two_touch_705,min_sl_pips,sell_only,matches,unmatched_real,unmatched_backtest,median_time_diff_min,median_price_diff_pips
+1,6.0,2.0,120,False,2.0,False,0,13,4,,
+2,6.0,2.0,120,False,2.0,True,0,13,2,,
+3,6.0,2.0,120,True,2.0,False,0,13,4,,
+4,6.0,2.0,120,True,2.0,True,0,13,2,,
+5,6.0,3.0,120,False,2.0,False,0,13,6,,
+6,6.0,3.0,120,False,2.0,True,0,13,2,,
+7,6.0,3.0,120,True,2.0,False,0,13,6,,
+8,6.0,3.0,120,True,2.0,True,0,13,2,,

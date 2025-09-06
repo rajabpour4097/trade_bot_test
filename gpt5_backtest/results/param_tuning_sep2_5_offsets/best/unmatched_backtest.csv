@@ -1,0 +1,2 @@
+timestamp,direction,entry,sl,tp,rr,sl_pips,exit_timestamp,exit_reason,exit_price
+2025-09-02 17:46:00,SELL,1.16707,1.16743,1.166638,1.2,3.5999999999991594,2025-09-02 17:50:00,TP,1.166638
