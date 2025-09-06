@@ -106,7 +106,15 @@ def main():
                 _ml_model, _ml_features = load_model(_abs_model_path)
                 log('ML filter loaded', color='cyan')
             except Exception as _e:
-                log(f'ML filter load failed: {_e}', color='red')
+                # گزارش نسخه sklearn برای عیب‌یابی ناسازگاری مدل
+                try:
+                    import sklearn as _sk
+                    _ver = getattr(_sk, '__version__', 'unknown')
+                    log(f'ML filter load failed: {_e} (sklearn={_ver})', color='red')
+                    if '__pyx_unpickle_CyHalfBinomialLoss' in str(_e):
+                        log('Hint: این خطا معمولاً به خاطر ناهماهنگی نسخه scikit-learn با نسخه آموزش مدل است. نسخه 1.5.x را نصب/فعال کنید.', color='yellow')
+                except Exception:
+                    log(f'ML filter load failed: {_e}', color='red')
                 _ml_model = None
                 _ml_features = None
 
