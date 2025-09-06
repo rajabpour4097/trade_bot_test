@@ -14,13 +14,29 @@ from metatrader5_config import MT5_CONFIG, TRADING_CONFIG, DYNAMIC_RISK_CONFIG, 
 from email_notifier import send_trade_email_async
 from analytics.hooks import log_signal, log_position_event
 
+# Ensure project root is on sys.path so sibling package imports work
+import os, sys
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
+
 # اختیاری: فیلتر ML برای تایید معامله
+_ML_IMPORT_ERROR = None
 try:
     from gpt5_backtest.src.ml_filter import load_model
     from gpt5_backtest.src.ml_features import extract_features
     _ml_model = None
     _ml_features = None
-except Exception:
+except Exception as _e:
+    _ML_IMPORT_ERROR = _e
+    # جلوگیری از NameError و غیرفعال‌سازی فیلتر ML
+    load_model = None  # type: ignore
+    extract_features = None  # type: ignore
+    try:
+        ML_FILTER_CONFIG['enable'] = False
+    except Exception:
+        pass
     _ml_model = None
     _ml_features = None
 
@@ -75,13 +91,24 @@ def main():
 
     # بارگذاری مدل ML در صورت فعال بودن
     if ML_FILTER_CONFIG.get('enable'):
-        try:
-            _ml_model, _ml_features = load_model(ML_FILTER_CONFIG.get('model_path'))
-            log('ML filter loaded', color='cyan')
-        except Exception as _e:
-            log(f'ML filter load failed: {_e}', color='red')
-            _ml_model = None
-            _ml_features = None
+        if load_model is None:
+            msg = f"ML filter disabled (import error: {_ML_IMPORT_ERROR})" if _ML_IMPORT_ERROR else "ML filter disabled (import missing)"
+            log(msg, color='yellow')
+        else:
+            try:
+                _model_path = ML_FILTER_CONFIG.get('model_path')
+                if not _model_path:
+                    raise ValueError('model_path not set in ML_FILTER_CONFIG')
+                # تبدیل مسیر نسبی به مطلق نسبت به ریشه پروژه
+                _abs_model_path = _model_path if os.path.isabs(_model_path) else os.path.join(_PROJECT_ROOT, _model_path)
+                if not os.path.exists(_abs_model_path):
+                    raise FileNotFoundError(f'model file not found: {_abs_model_path}')
+                _ml_model, _ml_features = load_model(_abs_model_path)
+                log('ML filter loaded', color='cyan')
+            except Exception as _e:
+                log(f'ML filter load failed: {_e}', color='red')
+                _ml_model = None
+                _ml_features = None
 
     # اضافه کردن متغیر برای ذخیره آخرین داده
     last_data_time = None
